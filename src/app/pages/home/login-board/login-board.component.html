@@ -1,0 +1,31 @@
+<div class="section" *ngIf="levelObj">
+    <p class="text-white pl-3">Congratulations, you can search and mint content</p>
+
+    <div class="row flex-row-reverse limit" >
+        <div class="col-12 col-md-4 pb-3" *ngFor="let item of levelObj | keyvalue">
+            <div class="rounded overflow-hidden">
+                <div class="row">
+                    <div class="col-12 text-center bg-dark-second py-3">
+                        <span class="font-second">OLAND length: <strong class="text-white">{{ item.key }} <ng-container *ngIf="item.key == 8">- 50</ng-container> </strong></span>
+                    </div>
+                    <div class="col-6 text-center bg-dark-third pr-0 py-4">
+                        <div style="border-right: 1px solid #18314D">
+                            <strong class="font-point fs-3">{{ item.value.mintCount }}</strong><strong class="text-white fs-3"> / {{ item.value.mintLimit}}</strong>
+                            <div class="font-second">current / limit</div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-center bg-dark-third pl-0 py-4">
+                        <div>
+                            <strong class="font-importent fs-3">{{ item.value.mintPrice }}</strong> <span class="font-importent fs-5">DEV</span>
+                            <div class="font-second">Price</div>
+                        </div>
+                    </div>
+                    <div class="col-12 bg-dark-second py-2 px-3">
+                        <span class="font-second px-3">Mint top {{ item.value.mintLimit }} OLAND enjoy {{ item.value.priceOff }}% discount</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

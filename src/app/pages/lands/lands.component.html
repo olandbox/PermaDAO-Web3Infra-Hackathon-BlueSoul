@@ -1,0 +1,132 @@
+
+<ng-template #wild>
+    <p class="text-white p-3">You are in the wilderness of nowhere.</p>
+</ng-template>
+
+<div class="main">
+
+    <div *ngIf="nameArray?.length > 2" class="container">
+        <ul *ngIf="analysisData.length > 0; else wild" class="text-white py-3">
+            <li *ngFor="let item of analysisData">
+                <span *ngIf="language === LANG.all">{{ item.language }} </span>
+                <a *ngIf="item.category == 'url'" href="{{item.url}}">{{item.url}}</a>
+                <img *ngIf="item.category == 'image'" class="w-100" src="{{item.logo}}" alt="{{item.alias}}">
+                <p *ngIf="item.category == 'text'"><strong>{{item.alias}}</strong><br> <small>{{item.url}}</small></p>
+                <p *ngIf="item.category == 'wallet' || item.category == 'smartContract'"><strong>{{item.alias}}</strong><br> <small>{{item.url}}</small></p>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="lands" *ngIf="nameArray?.length == 2">
+        
+        <div class="container py-3 py-md-5">
+            <ul class="d-flex justify-content-end">
+                <li class="btn rounded-pill px-4 py-2" [ngClass]="suffix === EXT.detail_public ? 'btn-primary' : 'btn-second'" (click)="switchTab(EXT.detail_public)">Public</li>
+                <li class="btn rounded-pill ml-3 px-4 py-2" [ngClass]="suffix === EXT.detail_verify ? 'btn-primary' : 'btn-second'" (click)="switchTab(EXT.detail_verify)">Official</li>
+                <li class="btn rounded-pill ml-3 px-4 py-2" [ngClass]="suffix === EXT.detail_private ? 'btn-primary' : 'btn-second'" (click)="switchTab(EXT.detail_private)">Private</li>
+            </ul>
+        </div>
+        <ng-container *ngIf="suffix === EXT.detail_public">
+            <div *ngIf="objectStatus > 0 && baseData._status === 'active'" class="position-relative container px-0">
+                <button class="btn btn-language" (click)="changeLanguage()">{{language | uppercase}}</button>
+                <app-thumb [suffix]="suffix" [baseData]="baseData" [language]="language"></app-thumb>
+                <app-intro [suffix]="suffix" [baseData]="baseData" [language]="language"></app-intro>
+                <app-community [suffix]="suffix" [baseData]="baseData" [language]="language"></app-community>
+            </div>
+            <ng-container *ngIf="objectStatus == 0 || (objectStatus > 0 && baseData._status !== 'active')">
+                <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+                <div class="container">
+                    <div class="lands-mint">
+                        <p>The content editing function will be released soon.</p>
+                        <p>There will be token rewards for you if you contribute meaningful content.</p>
+                        <p>Please stay tuned!</p>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="objectStatus < 0">
+                <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+                <app-loading [isLoading]="objectStatus < 0"></app-loading>
+            </ng-container>
+            <!-- <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+            <app-loading [isLoading]="objectStatus < 0"></app-loading>
+            <div class="container" *ngIf="objectStatus >= 0">
+                <div class="lands-mint">
+                    <p>The content editing function will be released soon.</p>
+                    <p>There will be token rewards for you if you contribute meaningful content.</p>
+                    <p>Please stay tuned!</p>
+                </div>
+            </div> -->
+        </ng-container>
+        <ng-container *ngIf="suffix === EXT.detail_verify">
+            <div *ngIf="objectStatus > 0" class="position-relative container px-0">
+                <button class="btn btn-language" (click)="changeLanguage()">{{language | uppercase}}</button>
+                <app-thumb [suffix]="suffix" [baseData]="baseData" [language]="language"></app-thumb>
+                <app-intro [suffix]="suffix" [baseData]="baseData" [language]="language"></app-intro>
+                <app-community [suffix]="suffix" [baseData]="baseData" [language]="language"></app-community>
+                <div class="container"><hr class="my-40" *ngIf="rights === 0"></div>
+                <app-editor *ngIf="rights === 0"></app-editor>
+            </div>
+            <ng-container *ngIf="objectStatus == 0">
+                <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+                <div class="container">
+                    <div class="lands-mint">
+                        <p>No one has claimed to be the owner of the official space. </p>
+                        <p>If you are the official owner of this land, please join olandbox DC to apply for certification by contacting us.</p>
+                        <p>After the certification is passed, you can have the authority to edit the official land.</p>
+                        <p>The price of getting Blue V is 180U per year, just contact us to get it.Top 300 will be free!</p>
+                        <div class="text-right">
+                            <button class="btn btn-guid mt-5" (click)="goDc()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-discord" viewBox="0 0 16 16">
+                                    <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+                                </svg>
+                                Go to claim
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="objectStatus < 0">
+                <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+                <app-loading [isLoading]="objectStatus < 0"></app-loading>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="suffix === EXT.detail_private">
+            <div *ngIf="objectStatus > 0" class="position-relative container px-0">
+                <!-- <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+                <div class="container">
+                    <div class="lands-mint">
+                        <p>There is no content for the time being, the content editing function will be released soon.</p>
+                    </div>
+                </div> -->
+                <button class="btn btn-language" (click)="changeLanguage()">{{language | uppercase}}</button>
+                <app-thumb [suffix]="suffix" [baseData]="baseData" [language]="language"></app-thumb>
+                <app-intro [suffix]="suffix" [baseData]="baseData" [language]="language"></app-intro>
+                <app-community [suffix]="suffix" [baseData]="baseData" [language]="language"></app-community>
+                <div class="container"><hr class="my-40" *ngIf="rights === 0"></div>
+                <app-editor *ngIf="rights === 0"></app-editor>
+            </div>
+            <ng-container *ngIf="objectStatus == 0">
+                <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+                <div class="container">
+                    <div class="lands-mint">
+                        <p>Congratulations!</p>
+                        <p>There are no owners of this land yet.</p>
+                        <p> Go and mint your own land now, so you can get the possible benifits in the future~</p>
+                        <div class="text-right">
+                            <button class="btn btn-guid mt-5" [routerLink]="['/oland/r/mint']" [queryParams]="{s: name}">Click to mint</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="objectStatus < 0">
+                <app-thumb [suffix]="suffix" [baseData]="{name: name, logoStatus: 1}"></app-thumb>
+                <app-loading [isLoading]="objectStatus < 0"></app-loading>
+            </ng-container>
+        </ng-container>
+
+
+
+    
+    </div>
+</div>

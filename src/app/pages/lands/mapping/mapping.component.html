@@ -1,0 +1,54 @@
+
+<div class="container lands-mapping-editor">
+    <div class="sub-title">You can turn on/ off the domain name & mapping of your profile.</div>
+    <div class="list-group mb-5">
+        <div class="list-group-item py-4">
+            <div class="link">
+                <img src="../../../../assets/images/land1.png" class="mr-2">
+                <div class="link-wrap">
+                    <span class="txt">{{getAccount(baseData.name)}}.v</span>
+                    <span class="attr-title" title="{{baseData.name}}.v">{{baseData.name}}.v</span>
+                </div>
+                <button class="btn-edit" (click)="copy(baseData.name + '.v')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-front" viewBox="0 0 16 16">
+                        <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2H5z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="list-group-item py-4" *ngIf="lands == null">
+            <ngx-skeleton-loader style="width: 100%;" count="1" appearance="line" animation="pulse" [theme]="{'background-color': '#09101A'}"></ngx-skeleton-loader>
+        </div>
+
+        <ng-container *ngIf="lands?.length > 0">
+            <div class="list-group-item py-4" *ngFor="let item of lands; let i = index">
+                <div class="link">
+                    <img src="../../../../assets/images/land1.png" class="mr-2">
+                    <div class="link-wrap">
+                        <span class="txt">{{item.name}}.o</span>
+                        <span class="attr-title" title="{{item.name}}.o">{{item.name}}.o</span>
+                    </div>
+                    <button class="btn-edit" (click)="copy(item.name + '.o')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-front" viewBox="0 0 16 16">
+                            <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm5 10v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2v5a2 2 0 0 1-2 2H5z"/>
+                        </svg>
+                    </button>
+                    <div class="custom-control custom-switch custom-switch-md" style="padding: 0; top: 3px">
+                        <input type="checkbox" class="custom-control-input" id="mapSwitch{{i}}" [checked]="item.mapping" (change)="mappingChange($event,item)"> 
+                        <label class="custom-control-label" for="mapSwitch{{i}}"></label>
+                    </div>
+                </div>
+            </div>
+            <mat-paginator style-paginator showFirstLastButtons *ngIf="privatePage.length > privatePage.pageSize"
+            [showTotalPages]="4"
+            [length]="privatePage.length"
+            [pageSize]="privatePage.pageSize"
+            [pageIndex]="privatePage.pageIndex"
+            (page)="privatePageChange($event)"
+            ></mat-paginator>
+        </ng-container>
+    </div>
+
+    
+</div>

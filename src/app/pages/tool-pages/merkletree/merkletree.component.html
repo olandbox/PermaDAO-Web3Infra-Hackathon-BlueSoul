@@ -1,0 +1,79 @@
+<div class="container text-white merkle">
+    <h1>Merkle Tree JS Test</h1>
+    <hr>
+    <form>
+        <div class="form-group">
+            <label for="level" class="col-12">Select Level: </label>
+            <select name="level" id="level" class="form-control" [(ngModel)]="level" (ngModelChange)="changeLevel($event)">
+                <option [value]="item" *ngFor="let item of levels">Level: {{ item }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="leaves" class="col-12">Leaves: </label>
+            <textarea name="leaves" id="leaves" rows="3" class="form-control" placeholder='["0x98085FDD27d568B7735E466e82F228345F666c2c"]' [(ngModel)]="merkle.leaves"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="hash" class="col-2">Hash function: </label>
+            <div class="form-check form-check-inline" *ngFor="let item of merkle.hashFn">
+                <input type="radio" class="form-check-input" name="{{item.name}}" value="{{item.name}}" [checked]="item.checked === true"  [(ngModel)]="merkle.hashFnChecked">
+                <label for="hashFn" class="form-check-label">{{item.name}}</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="options" class="col-2">Options: </label>
+            <div class="form-check form-check-inline" *ngFor="let item of merkle.options">
+                <input type="checkbox" class="form-check-input" name="{{item.name}}" value="{{item.name}}" [(ngModel)]="item.selected">
+                <label class="form-check-label" for="{{item.name}}">{{item.name}}</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="submitInput()">Submit</button>
+    </form>
+    <hr>
+
+    <section>
+        <h2>Verify</h2>
+        <form>
+            <div class="form-group">
+                <label for="verifyProof">Input Your Proof: </label>
+                <textarea name="verifyProof" id="verifyProof" rows="3" class="form-control" name="proof" [(ngModel)]="verifiction.proof"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="verifyLeaf">Leaf: </label>
+                <input type="text" class="form-control" name="leaf" [(ngModel)]="verifiction.leaf">
+            </div>
+            <div class="form-group">
+                <label for="verifyRoot">Root: </label>
+                <input type="text" class="form-control" name="root" [(ngModel)]="verifiction.root">
+            </div>
+            <button type="submit" class="btn btn-info" (click)="verify()">Verify</button>
+            <span class="ml-3">Verify Result: <b *ngIf="verifiction.result !== null">{{ verifiction.result }}</b></span>
+        </form>
+    </section>
+    <hr>
+
+    <section>
+        <h2>Proof</h2>
+        <form>
+            <div class="form-group">
+                <label for="leave">Select Your Leave: {{leave}}</label>
+                <select name="leave" id="leave" class="form-control" [(ngModel)]="leave" (ngModelChange)="getProof($event)">
+                    <option [value]="item" *ngFor="let item of output.leaves; let i = index">{{ i + '#' + item }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Proof: </label>
+                <pre>{{this.proof | json}}</pre>
+            </div>
+        </form>
+    </section>
+    <hr>
+
+    <section>
+        <h2>Output</h2>
+        <h3>Root: </h3>
+        <p>{{ output.root }}</p>
+        <h3>Leaves: </h3>
+        <pre>{{ output.leaves | json }}</pre>
+    </section>
+</div>

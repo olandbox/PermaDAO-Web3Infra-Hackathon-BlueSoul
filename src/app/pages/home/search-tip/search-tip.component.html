@@ -1,0 +1,11 @@
+
+<hr class="mt-4">
+<div class="row">
+    <div class="col-12">
+        <p class="text-white fw-bold mb-4" *ngIf="searchBoard === SearchBoard.notOpen">Sorry, the land is not yet open for mint.</p>
+        <p class="text-white fw-bold mb-4" *ngIf="searchBoard === SearchBoard.minted">Sorry, the oland has already been mint. Please search for other content to mint.</p>
+        <!-- <p class="text-white fw-bold mb-4" *ngIf="searchInfo.owner">Sorry, the oland has already been mint. Please search for other content to mint.</p>
+        <p class="text-white fw-bold mb-4" *ngIf="!searchInfo.owner && searchInfo.logicLength > 8">Congratulations! "{{ searchInfo.standardName }}" hasn't been mint yet, you can mint it.</p>
+        <p class="text-white fw-bold mb-4" *ngIf="!searchInfo.owner && searchInfo.logicLength >=6 && searchInfo.logicLength < 8">Please mint this land after choosing {{searchInfo.logicLength}} L land voucher </p> -->
+    </div>
+</div>

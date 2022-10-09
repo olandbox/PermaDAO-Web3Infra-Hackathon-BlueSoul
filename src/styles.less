@@ -1,0 +1,192 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;caret-color: transparent; }
+input, textarea {caret-color: #fff;}
+
+.main {
+    min-height: 100vh;
+    padding: 72px 0 80px 0;
+    margin: -72px 0 -80px 0;
+}
+@media (max-width: 575.98px) {
+    .main {
+        padding: 58px 0 0 0;
+        margin: -58px 0 0 0;
+    }
+}
+
+
+.font-importent {
+    color: #10BAE5;
+    
+}
+.font-title {
+    color: #2050CB !important;
+}
+.font-point {
+    color: #365DC0 !important;
+}
+.font-second {
+    color: #5F6677 !important;
+}
+.bg-gray {
+    background-color: #121A26;
+}
+.hide {
+    display: none!important;
+    transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+    transition-delay: 0s;
+}
+hr {
+    border-top: 1px solid #1B314D;
+    margin-top: 0;
+}
+.border-secondary {
+    border-color: #666D80 !important;
+}
+.svg-importent {
+    filter: invert(77%) sepia(67%) saturate(5546%) hue-rotate(153deg) brightness(104%) contrast(87%);
+}
+.fs-1 {
+    font-size: 2rem;
+}
+.fs-2 {
+    font-size: 1.75rem;
+}
+.fs-3 {
+    font-size: 1.5rem;
+}
+.fs-4 {
+    font-size: 1.25rem;
+}
+.fs-5 {
+    font-size: 1rem;
+}
+.fs-6 {
+    font-size: 0.75rem;
+}
+.bg-dark-first {
+    background-color: #080F17;
+}
+.bg-dark-second {
+    background-color: #0D1926;
+}
+.bg-dark-third {
+    background-color: #122133;
+}
+
+.modal-backdrop.show {opacity: 0.8;}
+.modal-mask {
+    background: #000;
+}
+
+.dark .modal-content {
+    background: #080F17;
+    border: 1px solid #666D80;
+    color: #666D80;
+    font-size: 20px;
+}
+.dark .modal-header .close {
+    border: 0;
+    outline: none;
+    margin-top: -0.3rem;
+    span {
+        color: #fff;
+        font-size: 2rem;
+    }
+}
+.dark .modal-header {
+    align-self: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #fff;
+    border-bottom: 0 none;
+}
+.dark .modal-footer {
+    border-top: 0 none;
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 991.98px) {
+    html, body {
+        font-size: 14px;
+    }
+    
+}
+@media screen and (max-width: 767.98px) {
+    .title-text h1 {
+        margin: 2.5rem 0 0 0;
+        font-size: 2.5rem;
+    }
+    
+}
+
+@media screen and (max-width: 478.98px) {
+    .title-text h1 {
+        margin: 2rem 0 0 0;
+        font-size: 2rem;
+    }
+}
+
+/* custom popover class */
+.popover-class {
+    background-color: #192F4C;
+    .arrow::after {
+        border-top-color: #192F4C;
+    }
+    .popover-body {
+        color: #fff;
+    }
+}
+
+/* custom switch for md */
+.invalid {
+    .custom-control-input:checked~.custom-control-label::before {
+        border-color: #7e848a;
+        background-color: #7e848a;
+    }
+}
+
+.custom-switch.custom-switch-md .custom-control-label {
+    top: -5px;
+    padding-right: 3.2rem;
+    padding-bottom: 0.2rem;
+    padding-top: 0.3rem;
+    font-size: 14px;
+    position: relative;
+    color: #fff;
+}
+
+.custom-switch.custom-switch-md .custom-control-label::before {
+    position: absolute;
+    left: auto;
+    right: 0;
+    height: 1.5rem;
+    width: calc(2rem + 0.75rem);
+    border-radius: 3rem;
+}
+
+.custom-switch.custom-switch-md .custom-control-label::after {
+    position: absolute;
+    left: auto;
+    right: calc(1.5rem - 2px);
+    width: calc(1.5rem - 4px);
+    height: calc(1.5rem - 4px);
+    border-radius: calc(2rem - (1.5rem / 2));
+}
+
+.custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
+    transform: translateX(calc(1.5rem - 0.25rem));
+}
+ion-datetime {
+    --ion-color-base: #fff;
+    --title-color: #fff;
+    --background:  #06111E;
+    --background-rgb: rgba(6, 17, 30, 1);
+    color: #9299AC;
+}
+
+
+

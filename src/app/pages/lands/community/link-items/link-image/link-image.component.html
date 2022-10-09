@@ -1,0 +1,22 @@
+<div class="land-list" [ngClass]="{'swiped': link.actions.swiped}">
+    <a *ngIf="link.properties.logo" href="{{link.properties.logo}}" download><mat-icon class="btn-swip">download</mat-icon></a>
+    <mat-icon *ngIf="!link.properties.logo" class="btn-swip"
+        #tooltip="matTooltip"
+        mat-raised-button
+        matTooltip="No Image!"
+        matTooltipPosition="left" 
+        matTooltipClass="copy-tip"
+        (mouseenter)="$event.stopImmediatePropagation()" 
+        (mouseleave)="$event.stopImmediatePropagation()"
+        (click)="communityActionService.tooltipCopy" 
+    >download</mat-icon>
+    <a class="content" (click)="viewImage(link.properties.logo)" (touchstart)="communityActionService.touchStart($event)" (touchend)="communityActionService.touchEnd($event, link)">
+        <div class="card-body text-truncate">
+            <h5 class="card-title text-truncate mb-0">{{ link.properties.alias }}</h5>
+        </div>
+        <div class="flex-shrink-0 img rounded">
+            <img *ngIf="link.properties.logo" src="{{ link.properties.logo }}" alt="...">
+            <mat-icon *ngIf="!link.properties.logo" class="white-icon">image</mat-icon>
+        </div>
+    </a>
+</div>

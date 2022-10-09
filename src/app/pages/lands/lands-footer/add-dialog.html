@@ -1,0 +1,24 @@
+<h2 mat-dialog-title class="text-white text-center">
+  Add 
+  <mat-icon class="float-right" (click)="close()">close</mat-icon>
+</h2>
+<mat-dialog-content class="mat-typography text-center">
+  <button mat-icon-button class="white-icon" aria-label="" [mat-dialog-close]="'url'" cdkFocusInitial>
+    <mat-icon>insert_link</mat-icon>
+  </button>
+  <button mat-icon-button class="white-icon" aria-label="" [mat-dialog-close]="'text'" cdkFocusInitial>
+    <mat-icon>title</mat-icon>
+  </button>
+  <button mat-icon-button class="white-icon" aria-label="" [mat-dialog-close]="'image'" cdkFocusInitial>
+    <mat-icon>image</mat-icon>
+  </button>
+  <button mat-icon-button class="white-icon" aria-label="" [mat-dialog-close]="'wallet'" cdkFocusInitial>
+    <mat-icon>account_balance_wallet</mat-icon>
+  </button>
+  <button mat-icon-button class="white-icon" aria-label="" [mat-dialog-close]="'smartContract'" cdkFocusInitial>
+    <mat-icon>handshake</mat-icon>
+  </button>
+  <button mat-icon-button class="white-icon" aria-label="" [mat-dialog-close]="'event'" cdkFocusInitial>
+    <mat-icon>event</mat-icon>
+  </button>
+</mat-dialog-content>

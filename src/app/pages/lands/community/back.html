@@ -1,0 +1,318 @@
+
+<div class="container" *ngIf="!edit">
+    <div class="lands-community">
+
+        <ng-container *ngIf="communitiesShow && communitiesShow.length > 0">
+            <ng-container *ngFor="let item of communitiesShow; let i = index;">
+                <div *ngIf="item.category === 'url'" class="land-list" [ngClass]="{'swiped': item.swiped}">
+                    <mat-icon class="btn" 
+                        #tooltip="matTooltip"
+                        mat-raised-button
+                        matTooltip="Copyed!"
+                        matTooltipPosition="left" 
+                        matTooltipClass="copy-tip"
+                        (mouseenter)="$event.stopImmediatePropagation()" 
+                        (mouseleave)="$event.stopImmediatePropagation()"
+                        (click)="copy(tooltip)" 
+                        [cdkCopyToClipboard]="item.url"
+                    >content_copy</mat-icon>
+                    <mat-icon class="btn btn-2" (click)="share(item.url)">share</mat-icon>
+                    <a [href]="item.url" target="_blank" class="content content-2" (touchstart)="touchStart($event)" (touchend)="touchEnd($event, i)">
+                        <div class="flex-shrink-0 img rounded-circle">
+                            <img *ngIf="item.logo" src="{{ item.logo }}" alt="...">
+                        </div>
+                        <div class="card-body text-truncate ml-2">
+                            <h5 class="card-title text-truncate mb-0">{{ item.alias }}</h5>
+                        </div>
+                    </a>
+                    <!-- <s class="space space-2"></s> -->
+                </div>
+                <div *ngIf="item.category === 'image'" class="land-list" [ngClass]="{'swiped': item.swiped}">
+                    <!-- <mat-icon class="btn" (click)="download(item.logo, item.alias)">download</mat-icon> -->
+                    <a *ngIf="item.logo" href="{{item.logo}}" download><mat-icon class="btn">download</mat-icon></a>
+                    <mat-icon *ngIf="!item.logo" class="btn"
+                        #tooltip="matTooltip"
+                        mat-raised-button
+                        matTooltip="No Image!"
+                        matTooltipPosition="left" 
+                        matTooltipClass="copy-tip"
+                        (mouseenter)="$event.stopImmediatePropagation()" 
+                        (mouseleave)="$event.stopImmediatePropagation()"
+                        (click)="copy(tooltip)" 
+                    >download</mat-icon>
+                    <a class="content" (click)="viewImage(item.logo)" (touchstart)="touchStart($event)" (touchend)="touchEnd($event, i)">
+                        <div class="card-body text-truncate">
+                            <h5 class="card-title text-truncate mb-0">{{ item.alias }}</h5>
+                        </div>
+                        <div class="flex-shrink-0 img rounded">
+                            <img *ngIf="item.logo" src="{{ item.logo }}" alt="...">
+                            <mat-icon *ngIf="!item.logo" class="white-icon">image</mat-icon>
+                        </div>
+                    </a>
+                </div>
+                <div *ngIf="item.category === 'text'" class="land-list" [ngClass]="{'swiped': item.swiped}">
+                    <mat-icon class="btn"
+                        #tooltip="matTooltip"
+                        mat-raised-button
+                        matTooltip="Copyed!"
+                        matTooltipPosition="left" 
+                        matTooltipClass="copy-tip"
+                        (mouseenter)="$event.stopImmediatePropagation()" 
+                        (mouseleave)="$event.stopImmediatePropagation()"
+                        (click)="copy(tooltip)" 
+                        [cdkCopyToClipboard]="item.url"
+                    >content_copy</mat-icon>
+                    <a class="content" (touchstart)="touchStart($event)" (touchend)="touchEnd($event, i)">
+                        <div class="card-body">
+                            <h5 class="card-title mt-3 mb-2 text-break">{{ item.alias }}</h5>
+                            <p class="mb-3 fs-6 text-secondary">{{ item.url }}</p>
+                        </div>
+                    </a>
+                </div>
+                <!-- 钱包和合约  -->
+                <div *ngIf="item.category === 'wallet' || item.category === 'smartContract'" class="land-list" [ngClass]="{'swiped': item.swiped}">
+                    <mat-icon class="btn" 
+                        #tooltip="matTooltip"
+                        mat-raised-button
+                        matTooltip="Copyed!"
+                        matTooltipPosition="left" 
+                        matTooltipClass="copy-tip"
+                        (mouseenter)="$event.stopImmediatePropagation()" 
+                        (mouseleave)="$event.stopImmediatePropagation()"
+                        (click)="copy(tooltip)" 
+                        [cdkCopyToClipboard]="item.url"
+                    >content_copy</mat-icon>
+                    <a class="content" (touchstart)="touchStart($event)" (touchend)="touchEnd($event, i)">
+                        <div class="flex-shrink-0 img rounded-circle">
+                            <img *ngIf="item.logo" src="{{ item.logo }}" alt="...">
+                        </div>
+                        <h5 class="mb-0 ml-2">{{item.alias}}</h5>
+                        <div class="card-body text-truncate ml-2">
+                            <h5 class="card-title text-truncate mb-0">{{ellipsisAddress(item.url)}}</h5>
+                        </div>
+                    </a>
+                </div>
+            </ng-container>
+        </ng-container>
+
+       
+        <ng-container *ngIf="communitiesShow && communitiesShow.length == 0">
+            <div class="col no-community">
+                There is no content for the time being.
+            </div>
+        </ng-container>
+        <ng-container *ngIf="communitiesShow === null">
+            <div class="col block">
+                <div *ngFor="let i of [0,1]" class="col">
+                    <div class="card">
+                        <ngx-skeleton-loader count="1" appearance="circle" animation="pulse" [theme]="{'background-color': '#09101A'}"></ngx-skeleton-loader>
+                        <ngx-skeleton-loader style="width: 100%;" count="2" appearance="line" animation="pulse" [theme]="{'background-color': '#112233'}"></ngx-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+</div>
+
+<!-- ----------------------------- -->
+
+<div class="container" *ngIf="edit">
+
+    <div class="lands-community-editor">
+
+        <div class="list-group pb-5" cdkDropList (cdkDropListDropped)="drop($event)">
+            <div class="list-group-item" *ngIf="communities === null">
+                <ngx-skeleton-loader style="width: 100%;" count="2" appearance="line" animation="pulse" [theme]="{'background-color': '#09101A'}"></ngx-skeleton-loader>
+            </div>
+            <ng-container *ngFor="let item of communities; let i = index">
+                <ng-container *ngIf="item.category === 'url'">
+                    <div class="list-group-item d-flex">
+                        <div class="list-drag" cdkDrag cdkDragHandle cdkDragRootElement=".list-group-item" [cdkDragData]="item">
+                            <mat-icon>drag_indicator</mat-icon>
+                        </div>
+                        <div class="image flex-shrink-0">
+                            <img *ngIf="item.logo" src="{{ item.logo }}" (click)="changeImage(item.category, i)">
+                            <div class="upload" *ngIf="!item.logo" (click)="changeImage(item.category, i)">
+                                <mat-icon>image</mat-icon>
+                            </div>
+                        </div>
+                        <div class="infos flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+                                <!-- edit alias -->
+                                <div class="list-title d-flex flex-grow-1">
+                                    <div class="editor">
+                                        <input *ngIf="item.aliasEditing" type="text" class="form-control form-control-edit" [(ngModel)]="item.alias" (blur)="blurProperty(i, 'alias')" (keyup.enter)="blurProperty(i, 'alias')" autoFocus>
+                                        <span *ngIf="!item.aliasEditing" class="d-inline-block text-truncate" style="max-width: calc(95%)" (click)="focusProperty(i, 'alias')" >{{ item.alias || 'Title' }}</span>
+                                        <button *ngIf="!item.aliasEditing" class="btn-edit" (click)="focusProperty(i, 'alias')">
+                                            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- switch button -->
+                                <div class="custom-control custom-switch custom-switch-md" [ngClass]="{'invalid': validCommunity(i)}">
+                                    <input type="checkbox" class="custom-control-input" [checked]="item.status" (change)="changeCommunityStatud($event, i)" id="communitySwitch{{i}}">
+                                    <label class="custom-control-label" for="communitySwitch{{i}}"></label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- edit url -->
+                                <div class="link d-flex flex-grow-1">
+                                    <div class="editor">
+                                        <input *ngIf="item.urlEditing" type="text" class="form-control form-control-edit" [(ngModel)]="item.url" (blur)="blurProperty(i, 'url')" (keyup.enter)="blurProperty(i, 'url')" autoFocus>
+                                        <span *ngIf="!item.urlEditing" class="d-inline-block text-truncate font-weight-light" [ngClass]="{'text-danger': !item.urlValid}" (click)="focusProperty(i, 'url')" >{{ item.url || 'Url' }}</span>
+                                        <button *ngIf="!item.urlEditing" class="btn-edit" (click)="focusProperty(i, 'url')">
+                                            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- delete button -->
+                                <button class="btn-del" (click)="delete(i)">
+                                    <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="item.category === 'text'">
+                    <div class="list-group-item d-flex">
+                        <div class="list-drag" cdkDrag cdkDragHandle cdkDragRootElement=".list-group-item" [cdkDragData]="item">
+                            <mat-icon>drag_indicator</mat-icon>
+                        </div>
+                        <div class="infos flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+                                <!-- edit alias -->
+                                <div class="list-title d-flex flex-grow-1">
+                                    <div class="editor">
+                                        <input *ngIf="item.aliasEditing" type="text" class="form-control form-control-edit" [(ngModel)]="item.alias" (blur)="blurProperty(i, 'alias')" (keyup.enter)="blurProperty(i, 'alias')" autoFocus>
+                                        <span *ngIf="!item.aliasEditing" class="d-inline-block text-truncate" style="max-width: calc(95%)" (click)="focusProperty(i, 'alias')" >{{ item.alias || 'Title' }}</span>
+                                        <button *ngIf="!item.aliasEditing" class="btn-edit" (click)="focusProperty(i, 'alias')">
+                                            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- switch button -->
+                                <div class="custom-control custom-switch custom-switch-md" [ngClass]="{'invalid': validCommunity(i)}">
+                                    <input type="checkbox" class="custom-control-input" [checked]="item.status" (change)="changeCommunityStatud($event, i)" id="communitySwitch{{i}}">
+                                    <label class="custom-control-label" for="communitySwitch{{i}}"></label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- edit url -->
+                                <div class="link d-flex flex-grow-1">
+                                    <div class="editor">
+                                        <input *ngIf="item.urlEditing" type="text" class="form-control form-control-edit" [(ngModel)]="item.url" (blur)="blurProperty(i, 'url')" (keyup.enter)="blurProperty(i, 'url')" autoFocus>
+                                        <span *ngIf="!item.urlEditing" class="d-inline-block text-truncate font-weight-light" (click)="focusProperty(i, 'url')" >{{ item.url || 'Content' }}</span>
+                                        <button *ngIf="!item.urlEditing" class="btn-edit" (click)="focusProperty(i, 'url')">
+                                            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- delete button -->
+                                <button class="btn-del" (click)="delete(i)">
+                                    <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="item.category === 'image'">
+                    <div class="list-group-item d-flex">
+                        <div class="list-drag" cdkDrag cdkDragHandle cdkDragRootElement=".list-group-item" [cdkDragData]="item">
+                            <mat-icon>drag_indicator</mat-icon>
+                        </div>
+                        <div class="image flex-shrink-0">
+                            <img *ngIf="item.logo" src="{{ item.logo }}" (click)="changeImage(item.category, i)">
+                            <div class="upload" *ngIf="!item.logo" (click)="changeImage(item.category, i)">
+                                <mat-icon>image</mat-icon>
+                            </div>
+                        </div>
+                        <div class="infos flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+                                <!-- edit alias -->
+                                <div class="list-title d-flex flex-grow-1">
+                                    <div class="editor">
+                                        <input *ngIf="item.aliasEditing" type="text" class="form-control form-control-edit" [(ngModel)]="item.alias" (blur)="blurProperty(i, 'alias')" (keyup.enter)="blurProperty(i, 'alias')" autoFocus>
+                                        <span *ngIf="!item.aliasEditing" class="d-inline-block text-truncate" style="max-width: calc(95%)" (click)="focusProperty(i, 'alias')" >{{ item.alias || 'Title' }}</span>
+                                        <button *ngIf="!item.aliasEditing" class="btn-edit" (click)="focusProperty(i, 'alias')">
+                                            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- switch button -->
+                                <div class="custom-control custom-switch custom-switch-md" [ngClass]="{'invalid': validCommunity(i)}">
+                                    <input type="checkbox" class="custom-control-input" [checked]="item.status" (change)="changeCommunityStatud($event, i)" id="communitySwitch{{i}}">
+                                    <label class="custom-control-label" for="communitySwitch{{i}}"></label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- edit url -->
+                                <div class="link d-flex flex-grow-1"></div>
+                                <!-- delete button -->
+                                <button class="btn-del" (click)="delete(i)">
+                                    <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="item.category === 'wallet' || item.category === 'smartContract'">
+                    <div class="list-group-item d-flex">
+                        <div class="list-drag" cdkDrag cdkDragHandle cdkDragRootElement=".list-group-item" [cdkDragData]="item">
+                            <mat-icon>drag_indicator</mat-icon>
+                        </div>
+                        <div class="image flex-shrink-0">
+                            <img *ngIf="item.logo" src="{{ item.logo }}" (click)="changeImage(item.category, i)">
+                            <div class="upload" *ngIf="!item.logo" (click)="changeImage(item.category, i)">
+                                <mat-icon>image</mat-icon>
+                            </div>
+                        </div>
+                        <div class="infos flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+                                <!-- edit alias -->
+                                <div class="list-title d-flex flex-grow-1">
+                                    <div class="editor">
+                                        <input *ngIf="item.aliasEditing" type="text" class="form-control form-control-edit" [(ngModel)]="item.alias" (blur)="blurProperty(i, 'alias')" (keyup.enter)="blurProperty(i, 'alias')" autoFocus>
+                                        <span *ngIf="!item.aliasEditing && item.category === 'wallet'" class="d-inline-block text-truncate" style="max-width: calc(95%)" (click)="focusProperty(i, 'alias')" >{{ item.alias || 'Wallet' }}</span>
+                                        <span *ngIf="!item.aliasEditing && item.category === 'smartContract'" class="d-inline-block text-truncate" style="max-width: calc(95%)" (click)="focusProperty(i, 'alias')" >{{ item.alias || 'Token name' }}</span>
+                                        <button *ngIf="!item.aliasEditing" class="btn-edit" (click)="focusProperty(i, 'alias')">
+                                            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- switch button -->
+                                <div class="custom-control custom-switch custom-switch-md" [ngClass]="{'invalid': validCommunity(i)}">
+                                    <input type="checkbox" class="custom-control-input" [checked]="item.status" (change)="changeCommunityStatud($event, i)" id="communitySwitch{{i}}">
+                                    <label class="custom-control-label" for="communitySwitch{{i}}"></label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- edit url -->
+                                <div class="link d-flex flex-grow-1">
+                                    <div class="editor">
+                                        <input *ngIf="item.urlEditing" type="text" class="form-control form-control-edit" [(ngModel)]="item.url" (blur)="blurProperty(i, 'url')" (keyup.enter)="blurProperty(i, 'url')" autoFocus>
+                                        <span *ngIf="!item.urlEditing && item.category === 'wallet'" class="d-inline-block text-truncate font-weight-light" [ngClass]="{'text-danger': !item.urlValid}" (click)="focusProperty(i, 'url')" >{{ item.url || 'Wallet address' }}</span>
+                                        <span *ngIf="!item.urlEditing && item.category === 'smartContract'" class="d-inline-block text-truncate font-weight-light" (click)="focusProperty(i, 'url')" >{{ item.url || 'Contract address' }}</span>
+                                        <button *ngIf="!item.urlEditing" class="btn-edit" (click)="focusProperty(i, 'url')">
+                                            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- delete button -->
+                                <button class="btn-del" (click)="delete(i)">
+                                    <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+            </ng-container>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,61 @@
+{
+    "/img/": {
+        "target": "https://test.metadata.oland.info",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "/img/": "/oland/"
+        }
+    },
+    "/meta": {
+        "target": "http://mint.oland.info",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/meta": ""
+        }
+    },
+    "/api": {
+        "target": "https://mint.oland.info",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            
+        }
+    },
+
+    "/home": {
+        "target": "https://test.mint.oland.info",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/home": ""
+        }
+    },
+    "/a/": {
+        "target": "http://test.home.oland.info/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {}
+    },
+    "/ab/": {
+        "target": "http://oland.frp.ptteng.com/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {}
+    },
+    "/file": {
+        "target": "http://test.mint.oland.info",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {}
+    }
+    
+}

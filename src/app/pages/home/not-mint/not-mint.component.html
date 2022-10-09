@@ -1,0 +1,99 @@
+
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-45">
+    <div class="font-importent fs-1 text-truncate w-auto" style="line-height: 2.2rem;" (click)="goDetail(searchName)"><strong>{{ searchName }}</strong></div>
+    <div class="d-flex justify-content-end align-items-stretch w-land">
+        <div class="land-length">{{searchInfo.logicLength}} <br> length</div>
+        <button class="btn btn-dark mr-0" (click)="goDetail(searchName)">
+            View land
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+    </div>
+</div>
+<hr class="mt-4">
+<div class="row">
+    <div class="col-12">
+        <p class="text-white fw-bold mb-4" *ngIf="searchInfo.logicLength >= 8">Congratulations! "{{ searchName }}" hasn't been mint yet, you can mint it.</p>
+        <p class="text-white fw-bold mb-4" *ngIf="searchInfo.logicLength < 8">Congratulations! "{{ searchName }}" hasn't been mint yet, you can mint it.</p>
+    </div>
+</div>
+
+
+<!-- mint button -->
+<div class="mint d-none d-md-flex justify-content-start align-items-center">
+    <div class="mint-price" *ngIf="!offPrice">
+        <div class="font-importent">{{ searchInfo.originPrice }}<span>DEV</span></div>
+        <div class="font-second">Land Price</div>
+    </div>
+    <div class="mint-price" *ngIf="offPrice">
+        <div class="font-importent">{{ offPrice }}<span>DEV</span></div>
+        <div class="font-second">Favorable Price</div>
+    </div>
+    <div class="mint-slip" [ngClass]="{'toggle': mintSlipToggle}" (click)="mintSlipToggle = !mintSlipToggle">+10% 
+        <svg xmlns="http://www.wS.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </svg>
+    </div>
+    <div class="mint-tip">
+        <span><img src="../../../assets/images/arrow-up.svg" class="svg-importent">Sell out 10, and the price rises by {{rise}}dev.</span>
+        <button class="btn" [disabled]="mintDisable" (click)="mint()">Click to mint</button>
+    </div>
+    
+</div>
+<div class="mint-slip-tip d-none d-md-flex" *ngIf="mintSlipToggle">
+    <div (click)="mintSlipToggle = !mintSlipToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+            </svg>
+    </div>
+    <span>
+        Because of the rise price of land floors, it is necessary for you to pay 10% more to prevent the purchase from failing. And the excess payment amount will be returned after the transaction.
+    </span>
+</div>
+
+
+<div class="d-md-none mint-sm">
+    <div class="mint-tip">
+        <img src="../../../assets/images/arrow-up.svg" class="svg-importent">Sell out 10, and the price rises by {{rise}}dev.
+    </div>
+    <div class="mint-slip-tip" *ngIf="mintSlipToggle">
+        <div (click)="mintSlipToggle = !mintSlipToggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                </svg>
+        </div>
+        <span>
+            Because of the rise price of land floors, it is necessary for you to pay 10% more to prevent the purchase from failing. And the excess payment amount will be returned after the transaction.
+        </span>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="text-center" *ngIf="!offPrice">
+            <div class="font-importent">{{ searchInfo.originPrice }}<span>dev</span></div>
+            <div class="font-second">Land Price</div>
+        </div>
+        <div class="text-center" *ngIf="offPrice">
+            <div class="font-importent">{{ offPrice }}<span>dev</span></div>
+            <div class="font-second">Favorable Price</div>
+        </div>
+        <div class="mint-slip" [ngClass]="{'toggle': mintSlipToggle}" (click)="mintSlipToggle = !mintSlipToggle">+10% 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            </svg>
+        </div>
+        
+        <button class="btn ml-1" [disabled]="mintDisable" (click)="mint()">Click to mint</button>
+    </div>
+
+</div>
+
+
+<div class="mask" *ngIf="mintLoading">  
+    <div class="d-flex flex-column align-items-center" >
+        <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+        <div class="text-primary mt-3">Minting</div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="land-list" [ngClass]="{'swiped': link.actions.swiped}">
+    <mat-icon class="btn-swip"
+        #tooltip="matTooltip"
+        mat-raised-button
+        matTooltip="Copyed!"
+        matTooltipPosition="left" 
+        matTooltipClass="copy-tip"
+        (mouseenter)="$event.stopImmediatePropagation()" 
+        (mouseleave)="$event.stopImmediatePropagation()"
+        (click)="communityActionService.tooltipCopy(tooltip)" 
+        [cdkCopyToClipboard]="link.properties.url"
+    >content_copy</mat-icon>
+    <mat-icon class="btn-swip btn-2" (click)="communityActionService.share(link.properties.url)">share</mat-icon>
+
+    <a class="content content-2" (touchstart)="communityActionService.touchStart($event)" (touchend)="communityActionService.touchEnd($event, link)">
+        <div class="card-body">
+            <h5 class="card-title mt-3 mb-2 text-break d-flex align-items-center">
+                <img src="../../../../../../assets/images/time.png" class="title-img mr-3">
+                <div class="flex-grow-1">
+                    {{ link.properties.alias }}
+                    <span class="title-tip ml-3"><strong>•</strong> {{link.properties.type}}</span>
+                </div>
+            </h5>
+            <div class="d-flex align-items-center mb-3">
+                <div class="time-tip flex-fill" *ngIf="!isEventStart">Still before the event starts</div>
+                <div class="time-tip flex-fill text-center" *ngIf="isEventStart && !isEventEnd">Event has started</div>
+                <div class="time-tip flex-fill text-center" *ngIf="isEventStart && isEventEnd">Event has ended</div>
+                <div class="time-board" [ngClass]="timeStyle" *ngIf="!isEventStart">
+                    <cd-timer format="user" countdown="true" [startTime]="startSeconds" (onComplete)="eventEnd($event)" (onTick)="eventTick($event)">[days]d [hours]h [minutes]m</cd-timer>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center text-muted mb-3">
+                <div>Start Date: {{link.properties.startDate | date: 'MM/dd/yyyy HH:mm'}}</div>
+                <div>End Date: {{link.properties.endDate | date: 'MM/dd/yyyy HH:mm'}}</div>
+            </div>
+            <a [href]="link.properties.url" class="btn btn-block btn-primary btn-event-detail mb-3" role="button">View details</a>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,77 @@
+
+.lands-mapping-editor {
+    
+    .title {
+        color: #fff;
+        font-size: 24px;
+    }
+    .sub-title {
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #666D80;
+    }
+    .list-group {
+        .btn-edit {
+            background-color: transparent;
+            border: 0;
+            color: #666D80;
+        }
+        .list-group-item {
+            margin-bottom: 20px;
+            background: #0F1926;
+            border: 1px solid #192F4C;
+            border-radius: 5px;
+            color: #fff;
+            .list-title {
+                font-size: 20px;
+            }
+            .link {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                color: #666D80;
+                .link-wrap {
+                    width: 0;
+                    flex: 1;
+                    position: relative;
+                    line-height: 32px;
+                    height: 32px;
+                    overflow: hidden;
+                    color: #fff;
+                    .attr-title {
+                        display: block;
+                        position: relative;
+                        background: inherit;
+                        text-align: justify;
+                        height: 32px;
+                        overflow: hidden;
+                        top: -64px;
+                        word-break: break-word;
+                        word-wrap: break-word;
+                        background: #0F1926;
+                    }
+                    .txt {
+                        display: block;
+                        max-height: 64px;
+                        word-break: break-word;
+                        word-wrap: break-word;
+                    }
+                    .attr-title::before{
+                        content: attr(title);
+                        width: 87%;
+                        float: right;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        direction: rtl;
+                        margin-left: -0.5em;
+                    }
+                }
+            }
+        }
+        img {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+}

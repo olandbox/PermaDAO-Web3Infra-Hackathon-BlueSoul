@@ -1,0 +1,27 @@
+<div class="container" *ngIf="edit">
+    <div class="lands-community-editor">
+        <div class="list-group pb-5" cdkDropList (cdkDropListDropped)="drop($event)">
+            <ng-container *ngFor="let link of links">
+                <app-link-url-edit *ngIf="link.properties.category === CATEGORY.url" [link]="link"></app-link-url-edit >
+                <app-link-text-edit *ngIf="link.properties.category === CATEGORY.text" [link]="link"></app-link-text-edit>
+                <app-link-image-edit *ngIf="link.properties.category === CATEGORY.image" [link]="link"></app-link-image-edit>
+                <app-link-web3-edit *ngIf="link.properties.category === CATEGORY.wallet || link.properties.category === CATEGORY.smartContract" [link]="link"></app-link-web3-edit>
+                <app-link-event-edit *ngIf="link.properties.category === CATEGORY.event" [link]="link"></app-link-event-edit>
+            </ng-container>
+            
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="!edit">
+    <div class="lands-community">
+        <ng-container *ngFor="let link of linksShow; let i = index;">
+            <app-link-url *ngIf="link.properties.category === CATEGORY.url" [link]="link"></app-link-url>
+            <app-link-text *ngIf="link.properties.category === CATEGORY.text" [link]="link"></app-link-text>
+            <app-link-image *ngIf="link.properties.category === CATEGORY.image" [link]="link"></app-link-image>
+            <app-link-web3 *ngIf="link.properties.category === CATEGORY.wallet || link.properties.category === CATEGORY.smartContract" [link]="link"></app-link-web3>
+            <app-link-event *ngIf="link.properties.category === CATEGORY.event" [link]="link"></app-link-event>
+        </ng-container>
+    </div>
+</div>
+

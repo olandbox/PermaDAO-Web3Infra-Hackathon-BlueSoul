@@ -1,0 +1,19 @@
+<div class="land-list" [ngClass]="{'swiped': link.actions.swiped}">
+    <mat-icon class="btn-swip"
+        #tooltip="matTooltip"
+        mat-raised-button
+        matTooltip="Copyed!"
+        matTooltipPosition="left" 
+        matTooltipClass="copy-tip"
+        (mouseenter)="$event.stopImmediatePropagation()" 
+        (mouseleave)="$event.stopImmediatePropagation()"
+        (click)="communityActionService.tooltipCopy(tooltip)" 
+        [cdkCopyToClipboard]="link.properties.url"
+    >content_copy</mat-icon>
+    <a class="content" (touchstart)="communityActionService.touchStart($event)" (touchend)="communityActionService.touchEnd($event, link)">
+        <div class="card-body">
+            <h5 class="card-title mt-3 mb-2 text-break">{{ link.properties.alias }}</h5>
+            <p class="mb-3 fs-6 text-secondary">{{ link.properties.url }}</p>
+        </div>
+    </a>
+</div>

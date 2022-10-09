@@ -1,0 +1,20 @@
+<div class="container lands-thumb">
+    <div class="cover">
+        <div class="avator" *ngIf="langBaseData?.logoStatus != 0">
+            
+            <img *ngIf="langBaseData?.logo" [src]="langBaseData.logo" alt="">
+            <div *ngIf="!langBaseData?.logo" class="people">
+                <img src="../../../../assets/images/land.png" alt="">
+            </div>
+            <div *ngIf="langBaseData.isVip" class="vip"></div>
+        </div>
+    </div>
+
+
+    <div class="content" *ngIf="langBaseData?.logoStatus != 0">
+        <div class="mb-1">
+            <div class="title text-break w-100">{{ langBaseData.alias || langBaseData.name }}</div>
+        </div>
+    </div>
+
+</div>

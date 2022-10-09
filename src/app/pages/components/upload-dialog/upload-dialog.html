@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="text-white text-center">
+    Select Your Image
+    <mat-icon class="float-right" (click)="close()">close</mat-icon>
+</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-5 col-sm-4 col-md-3 col-lg-2">
+            <div class="image-content"  [ngClass]="url? 'image-content-full' : ''">
+                <div class="image-cover" (click)="file.click()">
+                    <img *ngIf="url && !isUploading" src="{{url}}" alt="">
+                    <div *ngIf="isUploading" class="image-loader">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="file" accept="image/*"  (change)="upload($event.target.files)" #file style="display: none;">
+            </div>
+        </div>
+        <div class="col-7 col-sm-8 col-md-9 col-lg-10">
+            <p class="fs-4 text-white">Upload an Image</p>
+            <p class="text-white">Image should be square and JPG, PNG or GIF format without 2 MB memory.</p>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col text-center">
+            <button type="button" class="btn btn-secondary mx-3" [mat-dialog-close]="false" cdkFocusInitial>Cancel</button>
+            <button type="button" class="btn btn-primary mx-3" [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+        </div>
+    </div> -->
+</mat-dialog-content>

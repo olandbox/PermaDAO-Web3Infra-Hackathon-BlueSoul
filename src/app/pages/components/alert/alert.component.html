@@ -1,0 +1,6 @@
+<div class="alert" [ngClass]="color ? 'alert-' + color : ''" *ngIf="alertStatus">
+    <strong>{{title}}</strong>{{body}}
+    <button *ngIf="haveClose" type="button" class="close" (click)="resolve()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

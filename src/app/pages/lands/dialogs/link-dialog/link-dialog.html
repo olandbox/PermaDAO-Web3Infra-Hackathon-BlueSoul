@@ -1,0 +1,30 @@
+<h2 mat-dialog-title class="text-white text-center">
+    Choose an Image
+    <mat-icon class="float-right" (click)="close()">close</mat-icon>
+</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-3 col-md-3 col-lg-2 px-1 px-md-2 my-1 my-md-2">
+            <div class="text-center p-2 p-md-3 rounded" style="background: #101A26" [mat-dialog-close]="'upload'" cdkFocusInitial>
+                <div style="height: 0; padding-bottom: 100%;" class="mb-2">
+                    <img src="../../../../assets/images/pdf-full@2x.png" alt="" style="position: absolute;
+                    top: calc(50% - 28px);
+                    left: calc(50% - 12px);
+                    width: 24px;">
+                </div>
+                <span class="text-white fs-6">Custom</span>
+            </div>
+        </div>
+        <ng-container *ngIf="links.length > 0">
+            <div class="col-3 col-md-3 col-lg-2 px-1 px-md-2 my-1 my-md-2" *ngFor="let item of links">
+                <div class="text-center p-2 p-md-4 rounded" style="background: #101A26" [mat-dialog-close]="item" cdkFocusInitial>
+                    
+                    <div style="height: 0; padding-bottom: 100%;" class="mb-2 position-relative">
+                        <img src="{{item.default.logo}}" alt="" class="w-100 position-absolute" style="inset: 0;">
+                    </div>
+                    <span class="text-white fs-6">{{item.type}}</span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</mat-dialog-content>

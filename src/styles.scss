@@ -1,0 +1,89 @@
+@import '~@angular/cdk/overlay-prebuilt.css'; /** Add this only for non-material project */
+@import '~ngx-sharebuttons/themes/default';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+
+
+
+// angular-materrial: pagination
+.mat-paginator {
+    background: transparent;
+    width: 100%;
+    padding: 0 40px;
+}
+.mat-paginator-range-label {
+    display: none;
+}
+.mat-paginator-page-size {
+    display: none !important;
+}
+// angular-materrial: loading
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #fff!important;
+}
+
+
+// angular-materrial: clipboard
+.copy-tip {
+    margin: 5px !important;
+    background: #0F1926;
+    border: 1px solid #192F4C;
+}
+
+// angular-materrial: land-footer-dialog
+.recommend-dialog {
+    mat-dialog-container {
+        background-color: rgb(7, 14, 26, 0.8);
+        border-radius: 10px;
+        border: 1px solid #1E2E45;
+        ::-webkit-scrollbar
+        {
+            width:8px;
+            height:8px;
+            background-color:#000;
+        }
+        ::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius:10px;
+            background-color:#000;
+        }
+        ::-webkit-scrollbar-thumb
+        {
+            border-radius:10px;
+            -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);
+            background-color:#101A26;
+        }
+    }
+}
+.lands-add-dialog {
+    mat-dialog-container {
+        background-color: rgb(7, 14, 26, 0.9);
+        border-radius: 10px;
+        border: 1px solid #1E2E45;
+        max-width: 1140px;
+        // min-width: 300px;
+    }
+}
+.cdk-overlay-container {
+    z-index: 1040;
+}
+// angular-materrial: land-share-dialog
+.lands-zoom-dialog {
+    mat-dialog-container {
+        background-color: rgb(7, 14, 26, 0.9);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        
+    }
+}
+
+// angular-materrial: icon-color
+.white-icon {
+    color: white;
+}
+.white-icon svg {
+    fill: white;
+}

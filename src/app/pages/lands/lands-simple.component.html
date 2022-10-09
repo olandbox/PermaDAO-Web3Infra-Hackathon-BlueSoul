@@ -1,0 +1,55 @@
+<app-loading [isLoading]="isLoading"></app-loading>
+
+<div *ngIf="isAnalysisPage && !isLoading">
+    <ul *ngIf="analysisData.length > 0; else wild" class="text-white py-3">
+        <li *ngFor="let item of analysisData">
+            <span *ngIf="language === LANG.all">{{ item.language }} </span>
+            <a *ngIf="item.category == 'url'" href="{{item.url}}">{{item.url}}</a>
+            <img *ngIf="item.category == 'image'" class="w-100" src="{{item.logo}}" alt="{{item.alias}}">
+            <p *ngIf="item.category == 'text'"><strong>{{item.alias}}</strong><br> <small>{{item.url}}</small></p>
+            <p *ngIf="item.category == 'wallet' || item.category == 'smartContract'"><strong>{{item.alias}}</strong><br> <small>{{item.url}}</small></p>
+        </li>
+    </ul>
+</div>
+<ng-template #wild>
+    <p class="text-white p-3">You are in the wilderness of nowhere.</p>
+</ng-template>
+
+<div class="land-share" *ngIf="!isAnalysisPage && !isLoading">
+    <!-- <app-loading *ngIf="objectStatus < 0" [isLoading]="objectStatus < 0"></app-loading> -->
+    <ng-container *ngIf="objectStatus > 0">
+        <button class="btn btn-language" (click)="changeLanguage()">{{language | uppercase}}</button>
+        <app-thumb-simple [suffix]="suffix" [baseData]="baseData" [language]="language"></app-thumb-simple>
+        <app-intro [suffix]="suffix" [baseData]="baseData" [language]="language"></app-intro>
+        <app-community [suffix]="suffix" [baseData]="baseData" [language]="language"></app-community>
+    </ng-container>
+    <ng-container *ngIf="(suffix === EXT.share_public || suffix === EXT.share_private_soul) && objectStatus == 0">
+        <div class="container d-flex justify-content-center align-items-center text-white py-5">
+            No space!
+        </div>
+    </ng-container>
+    <ng-container *ngIf="suffix === EXT.share_verify && objectStatus == 0">
+        <div class="container d-flex justify-content-center align-items-center text-white py-5">
+            No one has claimed to be the owner of the official space. 
+        </div>
+    </ng-container>
+    <ng-container *ngIf="suffix === EXT.share_private && objectStatus == 0">
+        <div class="container d-flex justify-content-center align-items-center text-white py-5">
+            No space! The page will be re-directed to detail in {{seconds}} seconds.
+        </div>
+    </ng-container>
+
+    <div class="fixed-bottom" *ngIf="(suffix === EXT.share_private && objectStatus > 0) ||( suffix === EXT.share_verify && objectStatus >= 0) || (suffix === EXT.share_private_soul) || (suffix === EXT.share_public)">
+        <div class="land-share-foot">
+            <button class="btn btn-col" (click)="share()">
+                <mat-icon>share</mat-icon>
+                Share
+            </button>
+            <button type="button" class="btn btn-primary" (click)="goDetail()">
+                <img src="../../../assets/images/view.png" alt="View Details">
+                View Details
+            </button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,58 @@
+<div class="main">
+    <div class="mint-bg">
+        <div class="container">   
+    
+            <div class="title-text">
+                <h1>ONE LAND ONE WORLD</h1>
+            </div>
+        
+        
+            <!-- search input -->
+            <form class="name-search position-relative">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg py-3" name="land" 
+                        placeholder="Support English letters and numbers"
+                        [disabled]="searchDisable || searchLoading"
+                        [(ngModel)]="searchName" 
+                        (keyup.enter)="goSearch(searchName)" 
+
+                        >
+        
+                        <button type="submit" class="btn btn-primary px-4" name="land" (click)="goSearch(searchName)" [disabled]="searchDisable || searchLoading">
+                            <svg *ngIf="!searchLoading" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                            <span *ngIf="searchLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span>Search</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="position-absolute name-search-tip" *ngIf="!searchVerify">Input between 5 and 50 characters and alphabets only</div>
+            </form>
+        
+            <app-logout-board *ngIf="searchBoard === SearchBoard.notSearch"></app-logout-board>
+            <ng-container *ngIf="searchBoard === SearchBoard.notSearch">
+                
+                <div class="text-center mb-3"><button class="btn btn-view "  routerLink="/oland/r/past">View All</button></div>
+            </ng-container>
+        
+        
+            <div class="section" *ngIf="searchBoard === SearchBoard.notOpen">
+                <app-not-open [searchInfo]="searchInfo" [searchName]="searchedName"></app-not-open>
+            </div>
+
+            <div class="section" *ngIf="searchBoard === SearchBoard.minted">
+                <app-minted [searchInfo]="searchInfo" [searchName]="searchedName"></app-minted>
+            </div>
+
+            <div class="section" *ngIf="searchBoard === SearchBoard.notMint">
+                <app-not-mint [searchInfo]="searchInfo" [searchName]="searchedName"></app-not-mint>
+            </div>
+            
+           
+        </div>
+    </div>
+</div>
+
+

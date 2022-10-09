@@ -1,0 +1,210 @@
+.lands {
+    padding-bottom: 20px;
+    overflow: hidden;
+    .btn-primary {
+        color: #fff;
+        background: linear-gradient(-90deg, rgba(32, 80, 203, 0.8), #2E62E6);
+    }
+    .btn-second {
+        color: #fff;
+        background-color: #0F1926;
+        border: 1px solid #192F4C;
+        &:hover {
+            background-color: #192F4C;
+        }
+    }
+    
+
+
+    .lands-edit-tabs {
+        position: relative;
+        padding: 40px 0;
+        .navbar-nav-scroll {
+            overflow-x: auto;
+            &::-webkit-scrollbar {
+                width: 3px;               /* width of the entire scrollbar */
+                height: 3px;
+            }
+              
+            &::-webkit-scrollbar-track {
+                background: #101011;        /* color of the tracking area */
+            }
+              
+            &::-webkit-scrollbar-thumb {
+                background-color: #192536;    /* color of the scroll thumb */
+                border-radius: 2px;       /* roundness of the scroll thumb */
+            }
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            color: #fff;
+            li {
+                list-style: none;
+                margin-right: 20px;
+                cursor: pointer;
+                flex-shrink: 0;
+                padding: 12px 30px;
+                border-radius: 10px;
+            }
+            .active {
+                color: #2E8AE6;
+                background-color: #0F1926;
+            }
+        }
+        .btn-language {
+            position: absolute;
+            right: 0;
+            z-index: 1;
+            top: calc(50% - 7px);
+            background-color: #fff;
+            color: #000;
+            border-radius: 3px 3px 0 0;
+            line-height: 14px;
+            height: 14px;
+            padding: 0 3px;
+            font-size: 10px;
+            border: 1px solid #fff;
+            &::before {
+                position: absolute;
+                background-color: #fff;
+                width: 0px;
+                height: 0px;
+                border-top: 5px solid #fff;
+                border-left: 5px solid #000;
+                border-right: 5px solid #000;
+                bottom: -6px;
+                left: calc(50% - 5px);
+                content: '';
+            }
+        }
+
+    }
+    .lands-mint {
+        text-indent: 1em;
+        background: #141F33;
+        padding: 80px 50px;
+        margin-top: 40px;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 10px;
+        font-weight: lighter;
+        .text-left {
+            text-indent: 0;
+        }
+        p {
+            margin-bottom: 0.5rem;
+        }
+        .btn {
+            background: linear-gradient(90deg, #2153D3, #4866B0);
+            border-radius: 5px;
+            font-size: 16px;
+            color: #FFFFFF;
+            height: 50px;
+            // &:hover {
+            //     background: linear-gradient(90deg, #285ce0, #506fbd);
+            // }
+            svg {
+                vertical-align: sub;
+            }
+        }
+        .btn-guid {
+            padding: 0;
+            background: transparent;
+            color: #ccc;
+            border-bottom: 1px solid #ccc;
+            height: 2em;
+            border-radius: 0;
+            &:hover {
+                color: #fff;
+                border-bottom: 1px solid #fff;
+            }
+        }
+    }
+    .lands-detail {
+        background: transparent;
+        padding: 56px 0;
+        margin-top: 40px;
+        margin-bottom: -20px;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 10px;
+        .btn {
+            background: linear-gradient(90deg, #2153D3, #4866B0);
+            border-radius: 5px;
+            font-size: 16px;
+            color: #FFFFFF;
+            height: 50px;
+            &:hover {
+                background: linear-gradient(90deg, #285ce0, #506fbd);
+            }
+        }
+    }
+}
+.account-card {
+    margin-bottom: calc(100vh - 337px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+    background: #0D1926;
+    color: #fff;
+    font-size: 30px;
+    .people {
+        margin-right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #09101A;
+        border-radius: 50%;
+        color: #18314D;
+        svg {
+            width: 60px;
+            height: 60px;
+
+        }
+    }
+}
+
+
+@media (max-width: 575.98px) {
+
+    .lands {
+        .lands-edit-tabs {
+            padding: 20px 0;
+            .container {
+                padding: 0;
+            }
+            ul {
+                font-size: 14px;
+                li {
+                    padding: 12px;
+                    margin-right: 20px;
+                }
+            }
+            .btn-language {
+                
+                right: 17px;
+               
+            }
+            .btn-back {
+                font-size: 14px;
+                border-radius: 20px 0 0 20px;
+            }
+        } 
+        .lands-mint {
+            padding: 40px 25px;
+            font-size: 12px;
+            margin-bottom: 0;
+            margin-top: 100px;
+
+            .btn {
+                font-size: 14px;
+                height: 40px;
+            }
+            .btn-guid {
+                height: 2em;
+            }
+        }
+    }
+}

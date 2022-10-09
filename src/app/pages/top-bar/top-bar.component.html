@@ -1,0 +1,66 @@
+<header class="py-3 text-white header">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center  justify-content-start header-content">
+            <a href="/" class="d-flex align-items-center mb-md-2 mb-lg-0 text-white text-decoration-none">
+                <img src="./assets/images/logo.png" alt="Ontology Land" class="logo">
+            </a>
+
+            <ul class="nav col-auto me-md-auto ml-auto mb-2 mb-md-0 ms-5 justify-content-center d-none d-md-flex">
+                <ng-container *ngFor="let item of menuList">
+                    <li *ngIf="item.isShow" role="button"><a class="nav-link px-3" [ngClass]="currentLink.indexOf(item.link) > -1 ? 'text-point' : 'text-white'" (click)="link(item)">{{ item.title }}</a></li>
+                </ng-container>
+                
+            </ul>
+
+            <div class="text-end ml-auto ml-md-0">
+                <button type="button" class="btn btn-outline-primary btn-sm mr-2 rounded-lg" *ngIf="!(chainStatus$ | async)" (click)="switchChain()">
+                    <span>Switch Network</span>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-sm rounded-lg" *ngIf="account && (chainStatus$ | async)" (click)="disconnect()">
+                    <span>{{ account.slice(0, 2) }}...{{ account.slice(38) }}</span>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-sm rounded-lg" *ngIf="!account && (chainStatus$ | async)" (click)="connect()">
+                    <span>Connect</span>
+                </button>
+            </div>
+
+            <!-- <div class="ml-2 text-primary fs6" *ngIf="account">{{ account.slice(0, 2) }}...{{ account.slice(38) }}</div> -->
+
+            
+            <!-- mobie -->
+
+            <button class="navbar-toggler d-block d-md-none" type="button" (click)="collapseMenu()">
+                &#9776;
+            </button>
+            <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <ng-container *ngFor="let item of menuList">
+                        <li *ngIf="item.isShow" class="nav-item" [ngClass]="currentLink == item.link ? 'active' : ''"><a class="nav-link" (click)="link(item)">{{ item.title }}</a></li>
+                    </ng-container>
+                    
+                    
+                    <li class="d-flex justify-content-around">
+                        <a class="text-white nav-link d-flex align-items-center" href="https://twitter.com" target="_blank">
+                            <img src="./assets/images/twitter.png" style="width: 2.5rem" />   
+                        </a>
+                        <a class="text-white nav-link d-flex align-items-center" href="https://discord.com" target="_blank">
+                            <img src="./assets/images/discord.png" style="width: 2.5rem"/>
+                        </a>
+                        <a class="text-white nav-link d-flex align-items-center" href="https://telegram.org" target="_blank">
+                            <img src="./assets/images/bxl-telegram.png" style="width: 2.5rem"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- <p>
+    <ngb-alert *ngIf="alert" type="danger" [dismissible]="false">
+      <strong>Error!</strong> {{ alert }}
+    </ngb-alert>
+</p> -->
+
+

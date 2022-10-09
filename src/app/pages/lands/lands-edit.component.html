@@ -1,0 +1,76 @@
+<div class="main">
+    <div class="lands" *ngIf="isLoading">
+        <app-loading [isLoading]="isLoading"></app-loading>
+    </div>
+    <div class="lands" *ngIf="!isLoading">
+        
+        <!-- 未连钱包 -->
+        <ng-container *ngIf="!account">
+            <div class="account-card">
+                <div class="container d-flex align-items-center justify-content-center">
+                <div class="text-white">
+                    Connect your wallet, please!
+                </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- 未登录 -->
+        <ng-container *ngIf="account && isSign === false">
+            <div class="account-card">
+                <div class="container d-flex align-items-center justify-content-center">
+                <div class="text-white">
+                    Sign first, please! <button class="btn btn-primary rounded-pill px-3" (click)="sign()">Sign</button>
+                </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- 查无数据 -->
+        <ng-container *ngIf="account && isSign === true && objectStatus == 0">
+            <div class="account-card">
+                <div class="container d-flex align-items-center justify-content-center">
+                <div class="text-white py-4 font-">
+                    <p><small>No one has claimed to be the owner of the official space. </small></p>
+                    <p><small>If you are the official owner of this land, please join olandbox DC to apply for certification by contacting us.</small></p>
+                    <p><small>After the certification is passed, you can have the authority to edit the official land.</small></p>
+                </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- 有数据但无权修改 -->
+        <ng-container *ngIf="account && isSign === true && objectStatus > 0 && rights != 0">
+            <div class="account-card">
+                <div class="container d-flex align-items-center justify-content-center">
+                <div class="text-white">
+                    <p>You do not have the right to modify</p>
+                </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- 有数据且有权修改 -->
+        <ng-container *ngIf="account && isSign && objectStatus > 0 && rights == 0">
+            <div class="lands-edit-tabs">
+                <div class="container">
+                    <div class="d-flex justify-content-between align-items-center position-relative">
+                        <ul class="d-flex px-0">
+                            <li [ngClass]="{'active': editTab === '1'}" (click)="editTab = '1'">Profile</li>
+                            <li [ngClass]="{'active': editTab === '2'}" (click)="editTab = '2'">Link</li>
+                            <li *ngIf="suffix === EXT.detail_verify" [ngClass]="{'active': editTab === '3'}" (click)="editTab = '3'">Mapping</li>
+                        </ul>
+                        <button class="btn btn-language" (click)="changeLanguage()">{{language | uppercase}}</button>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="editTab === '1'">
+                <app-thumb [suffix]="suffix" [edit]="'true'" [baseData]="baseData" [language]="language" (outData)="updateData($event)"></app-thumb>
+                <app-intro [suffix]="suffix" [edit]="'true'" [baseData]="baseData" [language]="language" (outData)="updateData($event)"></app-intro>
+            </ng-container>
+            <ng-container *ngIf="editTab === '2'">
+                <app-community [suffix]="suffix" [edit]="'true'" [baseData]="baseData" [language]="language"></app-community>
+            </ng-container>
+            <ng-container *ngIf="editTab === '3'">
+                <app-mapping [suffix]="suffix" [edit]="'true'" [baseData]="baseData"></app-mapping>
+            </ng-container>
+            <app-lands-footer [tab]="editTab" [baseData]="baseData" [language]="language"></app-lands-footer>
+        </ng-container>
+    </div>
+</div>

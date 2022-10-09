@@ -1,0 +1,79 @@
+<div class="detail-bg">
+    <div class="detail-card card" *ngIf="landData">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="card-img"><img src="{{ landData.image }}" alt=""></div>
+                <div class="col-md-auto">
+                    <h2>{{ landData.name }}</h2>
+                    <p>gene: {{ landData.gene }}</p>
+                </div>
+                <div class="col-md d-flex align-items-center justify-content-end">
+                    <button class="btn btn-opensea" (click)="goOpensea(landData.name)">
+                        <img src="../../../assets/images/opensea.png" alt="">
+                        opensea
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="detail-intro">
+            <h2>
+                <img src="../../../assets/images/detail-title-l.png" alt="">
+                <span class="mx-3 mx-lg-5">Space Introduction</span>
+                <img src="../../../assets/images/detail-title-r.png" alt="">
+            </h2>
+            <div class="row space">
+                <div class="col-lg">
+                    <div class="space-item">
+                        <h3>
+                            <img src="../../../assets/images/space1.png" alt="">
+                            Public space</h3>
+                        <p>The public space is similar to Wiki,edited and maintained publicly, and belongs to the public space of all humanity.</p>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="space-item">
+                        <h3>
+                            <img src="../../../assets/images/space2.png" alt="">
+                            Official space</h3>
+                        <p>The official space is reserved for official institutions to issue staffs like announcements and manufacture services, which is corresponding to the real world.</p>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="space-item">
+                        <h3>
+                            <img src="../../../assets/images/space3.png" alt="">
+                            OLandServer space</h3>
+                        <p>OLandServer space is the owner of the land, which can build its own content and services in a similar way to a domain name.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row model">
+                <div class="col-12 col-md-5 pic"></div>
+                <div class="col-12 col-md-7 card">
+                    <h3>Business Model</h3>
+                    <p>There are several types of income that can be expected in OlandBox, one is the initial income of Mint; the other is the commission income of the future Oland exchange; the third is the income sharing of the incentive layer; the fourth is the content and services charged; The DApp ecosystem is divided into. </p>
+                    <p>This part of the income is divided into two parts,one part is the owner of the token the owner of Oland; the other part is the community fund. </p>
+                    <p>The community fund includes the R&D team, the operations team, the official certification of OlandBox, the community ecology, etc.</p>
+                </div>
+            </div>
+            <div class="row align-items-center virtual">
+                <div class="col-12 col-md-5 order-md-last pic"></div>
+                <div class="col-12 col-md-7 card">
+                    <h3>Virtual image</h3>
+                    <p>In the future, each landowner can generate different 2D / 3D images according to their genes.</p>
+                </div>
+            </div>
+        </div>   
+        <div class="detail-soon">
+            <h3>The space of olandbox is coming soon.</h3>
+            <button class="btn">To be continued</button>
+        </div> 
+    </div>
+    <div class="detail-owner" *ngIf="landOwner">
+        <div class="container">
+            <p>owner: <span>{{ landOwner }}</span></p>
+        </div>
+    </div>
+</div>

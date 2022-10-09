@@ -1,0 +1,135 @@
+<div class="main">
+  <div class="lands-edit-tabs">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <ul class="d-flex">
+                
+                <li [ngClass]="{'active': tab === 2}" (click)="changeTab(2)">My Lands</li>
+                <li [ngClass]="{'active': tab === 3}" (click)="changeTab(3)">Lands Management</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+  
+  <div class="container overflow-hidden" *ngIf="account; else tip">
+    <ng-container *ngIf="tab === 1">
+      <div class="row card-group" *ngIf="cards.length">
+        <div class="col-12 col-lg-4 mb-3" *ngFor="let card of cards">
+          <div class="voucher-card">
+            <div class="head">
+              <div class="title">Quantity: <strong>{{ card.balance }}</strong></div>
+              <div class="title-sub"></div>
+            </div>
+            <div class="body">
+              <div class="percent">
+                <div class="info">
+                  <strong class="text-{{card.length}}">{{ card.priceOff == 0 ? 'Free' : card.priceOff + '%' }}</strong>
+                  <span>Discount</span>
+                </div>
+                <div class="thumb">
+                  <img src="../../../assets/images/voucher{{ card.length }}.png" alt="">
+                </div>
+              </div>
+              <div class="intro">
+                <h2>{{ card.length }}L Voucher </h2>
+                <p>Mint character length is {{ card.length }}, and the price is reduced by {{ 100 - card.priceOff }}%.</p>
+              </div>
+            </div>
+            <div class="foot">
+              <button class="btn btn-opensea" (click)="goVoucherOpensea(card)"><img src="../../../assets/images/opensea.png" alt=""> opensea</button>
+              <a class="btn btn-mint" routerLink="/oland/r/mint" [queryParams]="{voucher: card.cardId}">Click to mint</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 mb-3" *ngIf="isCardsLoading">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border text-light" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="empty-card" *ngIf="!cards.length">
+        <p>Follow twitter activity to get land voucher.</p>
+        <a class="btn" href="https://mobile.twitter.com/olandbox" target="_blank">Twitter</a>
+      </div>
+    </ng-container>
+  
+    <ng-container *ngIf="tab === 2">
+      <div class="row card-group" *ngIf="ownLands == null">
+        <div *ngFor="let i of [0,1, 2]" class="col-4 col-lg-2 mb-3">
+          <div class="land-card">
+              <ngx-skeleton-loader count="1" appearance="circle" animation="pulse" [theme]="{'background-color': '#09101A'}"></ngx-skeleton-loader>
+              <ngx-skeleton-loader style="width: 100%;" count="2" appearance="line" animation="pulse" [theme]="{'background-color': '#112233'}"></ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+      <div class="row card-group" *ngIf="ownLands?.length != 0">
+        <div class="col-4 col-lg-2 mb-3" *ngFor="let land of ownLands">
+          <div class="land-card" [ngClass]="'land' + land.num" (click)="goDetail(land.name, 'owner')">
+            <strong>{{ land.name }}</strong>
+          </div>
+          <button class="btn btn-second btn-block mt-2" (click)="goEdit(land.name, 'owner')">Edit Blue Soul</button>
+        </div>
+        <mat-paginator style-paginator showFirstLastButtons *ngIf="privatePage.length > privatePage.pageSize"
+          [showTotalPages]="4"
+          [length]="privatePage.length"
+          [pageSize]="privatePage.pageSize"
+          [pageIndex]="privatePage.pageIndex"
+          (page)="privatePageChange($event)"
+        >
+        </mat-paginator>
+      </div>
+      <div class="empty-card" *ngIf="ownLands?.length == 0">
+        <p>There's nothing here. Now go to mint land.</p>
+        <a class="btn" routerLink="/oland/r/mint">Mint</a>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="tab === 3">
+      <div class="row card-group" *ngIf="verifyLands == null">
+        <div *ngFor="let i of [0,1, 2]" class="col-4 col-lg-2 mb-3">
+          <div class="land-card">
+              <ngx-skeleton-loader count="1" appearance="circle" animation="pulse" [theme]="{'background-color': '#09101A'}"></ngx-skeleton-loader>
+              <ngx-skeleton-loader style="width: 100%;" count="2" appearance="line" animation="pulse" [theme]="{'background-color': '#112233'}"></ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+      <div class="row card-group" *ngIf="verifyLands.length != 0">
+        <div class="col-4 col-lg-2 mb-3" *ngFor="let land of verifyLands">
+          <div class="land-card" [ngClass]="'land' + land.num" (click)="goDetail(land.name, 'verify')">
+            <strong>{{ getAccount(land.name) }}</strong>
+          </div>
+          <button class="btn btn-second btn-block mt-2" (click)="goEdit(land.name, 'verify')">Edit Blue Soul</button>
+        </div>
+        <mat-paginator style-paginator showFirstLastButtons *ngIf="verifyPage.length > verifyPage.pageSize"
+          [showTotalPages]="4"
+          [length]="verifyPage.length"
+          [pageSize]="verifyPage.pageSize"
+          [pageIndex]="verifyPage.pageIndex"
+          (page)="verifyPageChange($event)"
+        >
+        </mat-paginator>
+      </div>
+      <div class="empty-card" *ngIf="verifyLands.length == 0">
+        <p>No one has claimed to be the owner of the official space at the moment. If you are the official owner of this land, please join olandbox DC to contact us to apply for certification. After the certification is passed, you can have the authority to edit your official land.</p>
+        <a class="btn" (click)="goDc()">
+          Go to claim
+        </a>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+
+<ng-template #tip>
+  <div class="account-card">
+    <div class="container d-flex align-items-center justify-content-center">
+      <div class="text-white">
+        Connect your wallet, please!
+      </div>
+    </div>
+  </div>
+</ng-template>

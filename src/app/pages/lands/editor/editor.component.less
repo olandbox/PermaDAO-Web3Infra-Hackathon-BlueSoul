@@ -1,0 +1,59 @@
+.lands-editor {
+    display: flex;
+    .block {
+        
+        .inblock {
+            padding: 20px;
+            background: #0F1926;
+            border: 1px solid #192F4C;
+            border-radius: 5px;
+        }
+        .title {
+            padding: 0 20px;
+            margin-bottom: 20px;
+            background: #09101A;
+            border: 1px solid #192F4C;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 60px;
+            height: 60px;
+            color: #666D80;
+        }
+        .card {
+            cursor: pointer;
+            background-color: transparent;
+            flex-direction: row;
+            .img {
+                width: 40px;
+                height: 40px;
+                background-color: #112233;
+                border-radius: 50%;
+            }
+            .card-body {
+                padding: 0 0 0 5px;
+                .card-title {
+                    font-size: 16px;
+                    color: #FFFFFF;
+                    line-height: 40px;
+                    margin-bottom: 0;
+                }
+                .card-text {
+                    font-size: 14px;
+                    color: #666D80;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 767.98px) {
+    .lands-editor {
+        .block {
+            .title {
+                padding: 0 15px;
+                font-size: 16px;
+                line-height: 50px;
+                height: 50px;
+            }
+        }
+    }
+}

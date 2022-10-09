@@ -1,0 +1,21 @@
+<ul class="list-group list-group-dark rounded-0">
+    <li *ngFor="let history of historyList | slice:0:lengthLimit" class="list-group-item list-group-item-action rounded px-3 py-md-4 py-3 mb-3 ">
+        <div class="d-flex w-100 justify-content-between">
+            <div>
+                <span class="second">Congratulations</span>
+                <span class="primary px-2">{{ history.registrant.slice(0, 2) }}...{{ history.registrant.slice(38) }}</span>
+                <span class="second">get</span>
+                <span class="second d-none d-md-inline"> "</span>
+                <a class="d-none d-md-inline text-truncate px-1" routerLink="/{{ history.originalName }}.owner">{{ history.originalName }}</a>
+                <span class="d-none d-md-inline second"> "</span>
+            </div>
+            <span class="primary time" style="flex: 0 0 auto">{{history.time | timeSince}}</span>
+        </div>    
+        <p class="d-md-none">
+            <span class="second"> "</span>
+            <a class="d-inline-block text-truncate" routerLink="/{{ history.originalName }}.owner">{{ history.originalName }}</a>
+            <span class="second">" </span>
+        </p>
+    </li>
+</ul>
+
